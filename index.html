@@ -24,20 +24,18 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
             display: flex;
-            align-items: center; /* Alinha a logo e o título verticalmente */
-            justify-content: space-between; /* Cria espaço entre a logo e o título */
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            width: 100px;
         }
         h1 {
             font-size: 2.5em;
             margin: 0;
             color: #7c5c3e;
-            flex-grow: 1; /* Faz com que o título ocupe o espaço restante */
-            text-align: center; /* Centraliza o título */
-        }
-        .logo {
-            width: 150px; /* Ajuste o tamanho conforme necessário */
-            height: auto; /* Mantém a proporção da imagem */
-            margin: 20px; /* Espaçamento em torno da logo */
+            text-align: center;
+            flex-grow: 1;
         }
         nav {
             margin: 20px 0;
@@ -54,75 +52,95 @@
         }
         section {
             padding: 20px;
-            text-align: left;
             max-width: 800px;
             margin: 20px;
+            text-align: left;
         }
-        .grid-container {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Cria colunas responsivas */
-            gap: 20px; /* Espaçamento entre os itens */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
         .grid-item {
+            background: white;
             border: 1px solid #ccc;
             padding: 10px;
-            background-color: #fff;
-            text-align: center; /* Centraliza o texto abaixo das imagens */
-            position: relative; /* Para controle de posição */
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .grid-item img {
-            width: 100%; /* Faz com que a imagem ocupe 100% da largura do contêiner */
-            height: auto; /* Mantém a proporção da imagem */
-            cursor: pointer; /* Indica que a imagem pode ser clicada */
-            transition: transform 0.3s; /* Efeito de transição ao passar o mouse */
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
-        .grid-item img:hover {
-            transform: scale(1.05); /* Aumenta a imagem ao passar o mouse */
+        .grid-item h3 {
+            margin: 10px 0 0;
         }
+        .grid-item p {
+            margin: 5px 0;
+        }
+        .grid-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            padding-top: 100px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.9); 
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+        }
+
         footer {
             background: #5b4e36;
             color: white;
             text-align: center;
             padding: 10px 0;
-            position: relative;
-            bottom: 0;
             width: 100%;
-        }
-        .social-icons-footer {
-            margin: 10px 0;
         }
         .social-icons-footer a {
             margin: 0 10px;
             color: white;
             font-size: 18px;
-        }
-        .cta {
-            background: #f8e3a0;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f8e3a0;
-        }
-        @media (max-width: 600px) {
-            .portfolio {
-                flex-direction: column;
-            }
-            h1 {
-                font-size: 2em; /* Ajusta o tamanho do título em telas menores */
-            }
         }
     </style>
 </head>
@@ -136,107 +154,65 @@
             <a href="#contato">Contato</a>
         </nav>
     </header>
-    
+
     <section id="sobre">
         <h2>Sobre Nós</h2>
-        <p>Na Riqueza em Convites, transformamos suas ideias em arte! Especializados em convites digitais, cardápios e designs personalizados, nossa missão é trazer um toque especial a cada evento. Combinamos criatividade e paixão para criar peças únicas que refletem a sua personalidade e tornam suas celebrações inesquecíveis. De festas de aniversário a casamentos, estamos aqui para ajudar a dar vida a cada momento especial da sua vida.</p>
+        <p>Na Riqueza em Convites, transformamos suas ideias em arte! Especializados em convites digitais, cardápios e designs personalizados, nossa missão é trazer um toque especial a cada evento. Combinamos criatividade e paixão para criar peças únicas que refletem a sua personalidade e tornam suas celebrações inesquecíveis.</p>
     </section>
-    
+
     <section id="portfolio">
         <h2>Nossos Trabalhos</h2>
-        <div class="grid-container">
-            <div class="grid-item">
+        <div class="grid">
+            <div class="grid-item" onclick="openModal(this)">
                 <img src="https://github.com/diogenesabreu/img/blob/main/Card%C3%A1pio%20de%20bolos%20moderno%20rosa%20marrom%20menu.png?raw=true" alt="Convite 1">
-                <p>Convite Moderno Rosa e Marrom</p>
+                <h3>Convite 1</h3>
+                <p>Convite digital para evento especial.</p>
             </div>
-            <div class="grid-item">
-                <img src="https://github.com/diogenesabreu/img/blob/main/3.jpeg?raw=true" alt="Convite 2">
-                <p>Convite Elegante</p>
+            <div class="grid-item" onclick="openModal(this)">
+                <img src="https://github.com/diogenesabreu/img/blob/main/1.jpeg?raw=true" alt="Convite 2">
+                <h3>Convite 2</h3>
+                <p>Design moderno para casamentos.</p>
             </div>
-            <div class="grid-item">
-                <img src="https://github.com/diogenesabreu/img/blob/main/1.jpeg?raw=true" alt="Convite 3">
-                <p>Convite Clássico</p>
+            <div class="grid-item" onclick="openModal(this)">
+                <img src="https://github.com/diogenesabreu/img/blob/main/2.jpeg?raw=true" alt="Convite 3">
+                <h3>Convite 3</h3>
+                <p>Convite especial para aniversários.</p>
             </div>
-            <div class="grid-item">
-                <img src="https://github.com/diogenesabreu/img/blob/main/2.jpeg?raw=true" alt="Cardápio 1">
-                <p>Cardápio Personalizado</p>
+            <div class="grid-item" onclick="openModal(this)">
+                <img src="https://github.com/diogenesabreu/img/blob/main/3.jpeg?raw=true" alt="Cardápio 1">
+                <h3>Cardápio 1</h3>
+                <p>Cardápio digital para eventos.</p>
             </div>
         </div>
     </section>
-    
-    <section class="cta">
-        <h2>Entre em Contato</h2>
-        <p>Para solicitar um orçamento ou mais informações, entre em contato conosco!</p>
-        <a href="#contato" style="background-color: #7c5c3e; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Fale Conosco</a>
-    </section>
 
-    <section id="contato">
-        <h2>Contato</h2>
-        <p>Email: contato@riquezaemconvites.com.br</p>
-        <p>Telefone: (xx) xxxx-xxxx</p>
-    </section>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
 
-    <section id="precos">
-        <h2>Tabela de Preços</h2>
-        <table>
-            <tr>
-                <th>Produto</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-            </tr>
-            <tr>
-                <td>Convite Digital</td>
-                <td>Convite personalizado para eventos.</td>
-                <td>R$ 50,00</td>
-            </tr>
-            <tr>
-                <td>Cardápio Personalizado</td>
-                <td>Cardápio digital para festas e eventos.</td>
-                <td>R$ 40,00</td>
-            </tr>
-            <tr>
-                <td>Logotipo</td>
-                <td>Criação de logotipo personalizado.</td>
-                <td>R$ 100,00</td>
-            </tr>
-        </table>
-    </section>
-    
     <footer>
         <p>&copy; 2024 Riqueza em Convites. Todos os direitos reservados.</p>
         <div class="social-icons-footer">
-            <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/whatsapp.png" alt="WhatsApp" /></a>
-            <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/instagram-new.png" alt="Instagram" /></a>
-            <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/facebook-new.png" alt="Facebook" /></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/whatsapp.png" alt="WhatsApp"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/instagram-new.png" alt="Instagram"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/facebook-new.png" alt="Facebook"></a>
         </div>
     </footer>
 
     <script>
-        const carouselImages = document.querySelector('.carousel-images');
-        const images = document.querySelectorAll('.carousel-images img');
-        const totalImages = images.length;
-        let currentIndex = 0;
-
-        function showImage(index) {
-            images.forEach((img, i) => {
-                img.style.display = i === index ? 'block' : 'none';
-            });
+        // Função para abrir o modal com a imagem clicada
+        function openModal(element) {
+            var imgSrc = element.querySelector('img').src;
+            document.getElementById('modalImage').src = imgSrc;
+            document.getElementById('myModal').style.display = "block";
         }
 
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % totalImages;
-            showImage(currentIndex);
+        // Função para fechar o modal
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
         }
-
-        function prevImage() {
-            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-            showImage(currentIndex);
-        }
-
-        nextButton.addEventListener('click', nextImage);
-        prevButton.addEventListener('click', prevImage);
-        
-        showImage(currentIndex); // Mostra a primeira imagem ao carregar
     </script>
 </body>
 </html>
