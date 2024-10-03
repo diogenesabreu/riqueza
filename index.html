@@ -19,7 +19,6 @@
         header {
             background: linear-gradient(135deg, #f8e3a0, #e4c95c);
             padding: 20px;
-            text-align: center;
             position: relative;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
@@ -30,14 +29,10 @@
         .logo {
             width: 100px;
         }
-        h1 {
-            font-size: 2.5em;
-            margin: 0;
-            color: #7c5c3e;
-            text-align: center;
-            flex-grow: 1;
-        }
         nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 20px 0;
         }
         nav a {
@@ -83,6 +78,20 @@
         }
         .grid-item:hover {
             transform: scale(1.05);
+        }
+        .more-info {
+            background-color: #7c5c3e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        .more-info:hover {
+            background-color: #f8e3a0;
+            color: #7c5c3e;
         }
 
         /* Modal */
@@ -146,8 +155,9 @@
 </head>
 <body>
     <header>
-        <img src="https://github.com/diogenesabreu/img/blob/main/logo.png?raw=true" alt="Logo" class="logo">
-        <h1>Riqueza em Convites</h1>
+        <div style="flex-grow: 1; display: flex; justify-content: center;">
+            <img src="https://github.com/diogenesabreu/img/blob/main/logo.png?raw=true" alt="Logo" class="logo">
+        </div>
         <nav>
             <a href="#sobre">Sobre Nós</a>
             <a href="#portfolio">Portfólio</a>
@@ -167,21 +177,25 @@
                 <img src="https://github.com/diogenesabreu/img/blob/main/Card%C3%A1pio%20de%20bolos%20moderno%20rosa%20marrom%20menu.png?raw=true" alt="Convite 1">
                 <h3>Convite 1</h3>
                 <p>Convite digital para evento especial.</p>
+                <button class="more-info">Mais Informações</button>
             </div>
             <div class="grid-item" onclick="openModal(this)">
                 <img src="https://github.com/diogenesabreu/img/blob/main/1.jpeg?raw=true" alt="Convite 2">
                 <h3>Convite 2</h3>
                 <p>Design moderno para casamentos.</p>
+                <button class="more-info">Mais Informações</button>
             </div>
             <div class="grid-item" onclick="openModal(this)">
                 <img src="https://github.com/diogenesabreu/img/blob/main/2.jpeg?raw=true" alt="Convite 3">
                 <h3>Convite 3</h3>
                 <p>Convite especial para aniversários.</p>
+                <button class="more-info">Mais Informações</button>
             </div>
             <div class="grid-item" onclick="openModal(this)">
                 <img src="https://github.com/diogenesabreu/img/blob/main/3.jpeg?raw=true" alt="Cardápio 1">
                 <h3>Cardápio 1</h3>
                 <p>Cardápio digital para eventos.</p>
+                <button class="more-info">Mais Informações</button>
             </div>
         </div>
     </section>
