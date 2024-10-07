@@ -29,6 +29,8 @@
         header img {
             width: 150px;
             border-radius: 50%;
+            display: block; /* Centraliza a imagem do cabeçalho */
+            margin: 0 auto; /* Adiciona margem automática para centralização */
         }
 
         nav {
@@ -137,6 +139,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: inline-block; /* Permite centralizar o formulário */
         }
 
         .contact-form input,
@@ -218,8 +221,6 @@
                     <img src="" id="modalImage" alt="Imagem da Galeria">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="changeImage(-1)">Anterior</button>
-                    <button type="button" class="btn btn-secondary" onclick="changeImage(1)">Próxima</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>
             </div>
@@ -227,49 +228,26 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Riqueza em Convites. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Riqueza em Convites - Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
     <script>
-        const images = [
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/Caneca%20panor%C3%A2mica%20mensagem%20dia%20dos%20pais%20delicado%20azul%20.png?raw=true"
-        ];
-
-        let currentIndex = 0;
-
         function openModal(index) {
-            currentIndex = index;
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = images[currentIndex];
+            const images = [
+                "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
+                "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
+                "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
+                "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
+                "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
+                "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
+                "https://github.com/diogenesabreu/img/blob/main/Caneca%20panor%C3%A2mica%20mensagem%20dia%20dos%20pais%20delicado%20azul%20.png?raw=true"
+            ];
+            document.getElementById("modalImage").src = images[index];
         }
-
-        function changeImage(direction) {
-            currentIndex += direction;
-            if (currentIndex < 0) {
-                currentIndex = images.length - 1; // Vai para a última imagem
-            } else if (currentIndex >= images.length) {
-                currentIndex = 0; // Volta para a primeira imagem
-            }
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = images[currentIndex];
-        }
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
 </body>
 </html>
