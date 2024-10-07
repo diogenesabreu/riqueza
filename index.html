@@ -161,6 +161,12 @@
         .contact-form button:hover {
             background-color: #8B5E38;
         }
+
+        .arrow {
+            cursor: pointer;
+            font-size: 2em;
+            color: #9F6B46;
+        }
     </style>
 </head>
 <body>
@@ -215,7 +221,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="" id="modalImage" alt="Imagem Modal">
+                    <span class="arrow" onclick="changeImage(-1)">&#10094;</span>
+                    <img id="modalImage" src="" alt="Imagem Modal">
+                    <span class="arrow" onclick="changeImage(1)">&#10095;</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -242,9 +250,25 @@
             "https://github.com/diogenesabreu/img/blob/main/Caneca%20panor%C3%A2mica%20mensagem%20dia%20dos%20pais%20delicado%20azul%20.png?raw=true"
         ];
 
+        let currentIndex = 0;
+
         function openModal(index) {
+            currentIndex = index;
             const modalImage = document.getElementById('modalImage');
-            modalImage.src = images[index];
+            modalImage.src = images[currentIndex];
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1; // Volta para a última imagem
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0; // Volta para a primeira imagem
+            }
+
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = images[currentIndex];
         }
 
         function sendMessage(event) {
