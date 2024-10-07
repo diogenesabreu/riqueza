@@ -184,13 +184,11 @@
     <div class="section" id="galeria">
         <h2>Galeria</h2>
         <div class="gallery">
-            <img src="https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true" alt="Galeria 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(0)">
-            <img src="https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true" alt="Galeria 2" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(1)">
-            <img src="https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true" alt="Galeria 3" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(2)">
-            <img src="https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true" alt="Galeria 4" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(3)">
-            <img src="https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true" alt="Galeria 5" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(4)">
-            <img src="https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true" alt="Galeria 6" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(5)">
-            <img src="https://github.com/diogenesabreu/img/blob/main/Caneca%20panor%C3%A2mica%20mensagem%20dia%20dos%20pais%20delicado%20azul%20.png?raw=true" alt="Galeria 7" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(6)">
+            <img src="https://github.com/diogenesabreu/imgriqueza/blob/main/1.jpg?raw=true" alt="Galeria 1" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(0)">
+            <img src="https://github.com/diogenesabreu/imgriqueza/blob/main/2.jpg?raw=true" alt="Galeria 2" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(1)">
+            <img src="https://github.com/diogenesabreu/imgriqueza/blob/main/3.jpg?raw=true" alt="Galeria 3" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(2)">
+            <img src="https://github.com/diogenesabreu/imgriqueza/blob/main/4.jpg?raw=true" alt="Galeria 4" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(3)">
+            <img src="https://github.com/diogenesabreu/imgriqueza/blob/main/5.jpg?raw=true" alt="Galeria 5" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="openModal(4)">
         </div>
     </div>
 
@@ -239,49 +237,32 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- JavaScript para gerenciar a galeria e o modal -->
     <script>
         const images = [
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/convite1.png?raw=true",
-            "https://github.com/diogenesabreu/img/blob/main/Caneca%20panor%C3%A2mica%20mensagem%20dia%20dos%20pais%20delicado%20azul%20.png?raw=true"
+            "https://github.com/diogenesabreu/imgriqueza/blob/main/1.jpg?raw=true",
+            "https://github.com/diogenesabreu/imgriqueza/blob/main/2.jpg?raw=true",
+            "https://github.com/diogenesabreu/imgriqueza/blob/main/3.jpg?raw=true",
+            "https://github.com/diogenesabreu/imgriqueza/blob/main/4.jpg?raw=true",
+            "https://github.com/diogenesabreu/imgriqueza/blob/main/5.jpg?raw=true"
         ];
 
-        let currentIndex = 0;
+        let currentImageIndex = 0;
 
         function openModal(index) {
-            currentIndex = index;
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = images[currentIndex];
+            currentImageIndex = index;
+            document.getElementById("modalImage").src = images[index];
         }
 
         function changeImage(direction) {
-            currentIndex += direction;
-
-            if (currentIndex < 0) {
-                currentIndex = images.length - 1; // Volta para a última imagem
-            } else if (currentIndex >= images.length) {
-                currentIndex = 0; // Volta para a primeira imagem
-            }
-
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = images[currentIndex];
+            currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+            document.getElementById("modalImage").src = images[currentImageIndex];
         }
 
         function sendMessage(event) {
             event.preventDefault();
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const mensagem = document.getElementById('mensagem').value;
-
-            const whatsappMessage = `Olá, meu nome é ${nome}. Meu email é ${email}. Mensagem: ${mensagem}`;
-            const whatsappUrl = `https://wa.me/5585991790443?text=${encodeURIComponent(whatsappMessage)}`;
-
-            window.open(whatsappUrl, '_blank');
-            document.getElementById('contactForm').reset();
+            alert("Mensagem enviada com sucesso!");
+            document.getElementById("contactForm").reset();
         }
     </script>
 </body>
