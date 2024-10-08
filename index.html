@@ -209,7 +209,7 @@
         <h2>Contato</h2>
         <p>Para mais informações ou para solicitar um orçamento, preencha o formulário abaixo:</p>
         <div class="contact-form">
-            <form id="contactForm" onsubmit="sendMessage(event)">
+            <form id="contactForm" onsubmit="sendWhatsAppMessage(event)">
                 <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
                 <input type="email" id="email" name="email" placeholder="Seu E-mail" required>
                 <textarea id="mensagem" name="mensagem" rows="5" placeholder="Sua Mensagem" required></textarea>
@@ -219,11 +219,11 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Imagem</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Visualizar Imagem</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -270,9 +270,15 @@
             document.getElementById("modalImage").src = images[currentImageIndex];
         }
 
-        function sendMessage(event) {
+        function sendWhatsAppMessage(event) {
             event.preventDefault();
-            alert("Mensagem enviada!");
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const mensagem = document.getElementById("mensagem").value;
+
+            const url = `https://api.whatsapp.com/send?phone=5585991790443&text=Nome:%20${encodeURIComponent(nome)}%0AEmail:%20${encodeURIComponent(email)}%0AMensagem:%20${encodeURIComponent(mensagem)}`;
+
+            window.open(url, '_blank');
             document.getElementById("contactForm").reset();
         }
     </script>
